@@ -30,6 +30,9 @@ ipch/
 *.bin
 msg00001.bin
 
+# Visual Studio upgrade logs
+UpgradeLog.htm
+
 # Windows
 Thumbs.db
 Desktop.ini
