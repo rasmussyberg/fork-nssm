@@ -1,0 +1,112 @@
+@media print {
+  #menu { display: none; }
+  #main { }
+}
+
+@media screen {
+  body {
+    display: flex;
+    justify-content: center;
+  }
+
+  #menu {
+    background: url(/images/sidebar.jpg) white no-repeat;
+    position: relative;
+    width: 128px;
+    flex-shrink: 0;
+    display: none;
+  }
+
+  #main {
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+    padding: 8px 20px;
+    box-sizing: border-box;
+  }
+}
+
+body {
+	color: black;
+  font-family: "Caslon 540", Helvetica, Arial;
+  background-color: white;
+}
+
+p {
+	text-indent: 1em;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-family: "Univers 55", Univers, Verdana;
+}
+
+a {
+	color: darkred;
+  text-decoration: none;
+}
+
+a:hover {
+	color: red;
+}
+
+.noindent {
+	text-indent: 0px;
+}
+
+.noIndent {
+	text-indent: 0px;
+}
+
+.menuindent {
+	margin-left: 8px;
+  text-indent: 0px;
+}
+
+.cvindent {
+	margin-left: 8px;
+  text-indent: 0px;
+}
+
+.bigIndent {
+	margin-left: 2em;
+  text-indent: 0px;
+}
+
+.code {
+	margin-left: 2em;
+  color: darkblue;
+  text-indent: 0px;
+}
+
+.bigred {
+  color: red;
+}
+
+.white {
+  color: white;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+table {
+  border-spacing: 0;
+  background-color: rgb(220, 220, 220);
+}
+
+table td {
+  padding: 0.25em;
+}
+
+table tr:first-child {
+  background-color: darkred;
+  color: white;
+}
+
+table tr:not(:first-child):nth-of-type(2n) {
+  background-color: rgb(248, 248, 248);
+}
