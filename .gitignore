@@ -1,0 +1,35 @@
+# Build output
+*.obj
+*.exe
+*.dll
+*.lib
+*.exp
+*.pdb
+*.ilk
+*.map
+*.suo
+*.user
+*.ncb
+*.sdf
+*.opensdf
+*.aps
+
+# Visual Studio directories
+Debug/
+Release/
+Win32/
+x64/
+ipch/
+.vs/
+
+# Visual Studio project files (generated)
+*.vcxproj.filters
+*.vcxproj.user
+
+# Compiled message resources
+*.bin
+msg00001.bin
+
+# Windows
+Thumbs.db
+Desktop.ini
