@@ -1,5 +1,5 @@
 NSSM: The Non-Sucking Service Manager
-Version 2.24, 2014-08-31
+Version 2.25+, 2026-01-20 (fork)
 
 NSSM is a service helper program similar to srvany and cygrunsrv.  It can 
 start any application as an NT service and will restart the service if it 
@@ -10,6 +10,26 @@ NSSM also has a graphical service installer and remover.
 Full documentation can be found online at
 
                               http://nssm.cc/
+
+
+Fork notice
+-----------
+This is a fork of the original NSSM project by Iain Patterson, hosted at
+https://git.nssm.cc/nssm/nssm.
+
+The goals of this fork are:
+
+  * Produce regular tagged releases of NSSM.
+  * Provide pre-compiled binaries (x64) as GitHub Releases so that users
+    can download a ready-to-run executable without needing to build from
+    source.
+  * Apply general project maintenance: updating the Visual Studio project
+    files, keeping the build working with modern toolchains, and
+    incorporating upstream changes as they become available.
+
+The source for this fork is available at
+https://github.com/RasmusvonSyberg/fork-nssm
+
 
 Since version 2.0, the GUI can be bypassed by entering all appropriate 
 options on the command line.
@@ -971,16 +991,19 @@ To find out the service name of a service with a display name:
 
 Building NSSM from source
 -------------------------
-NSSM is known to compile with Visual Studio 2008 and later.  Older Visual
-Studio releases may or may not work if you install an appropriate SDK and
-edit the nssm.vcproj and nssm.sln files to set a lower version number.
-They are known not to work with default settings.
+NSSM is known to compile with Visual Studio 2017 and later.  The solution
+file (nssm.sln) and project file (nssm.vcxproj) target Visual Studio 2022
+with the v143 platform toolset and the Windows 10 SDK.
 
-NSSM will also compile with Visual Studio 2010 but the resulting executable
-will not run on versions of Windows older than XP SP2.  If you require
-compatiblity with older Windows releases you should change the Platform
-Toolset to v90 in the General section of the project's Configuration
-Properties.
+To build from the command line, use the MSBuild binary bundled with Visual
+Studio.  From a bash or Developer Command Prompt, run:
+
+    "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" nssm.sln -p:Configuration=Release -p:Platform=x64
+
+The resulting executable will be placed in out\Release\win64\nssm.exe.
+
+Alternatively, open nssm.sln in Visual Studio, select the desired
+configuration (e.g. Release | x64) and press Ctrl+Shift+B.
 
 
 Credits
