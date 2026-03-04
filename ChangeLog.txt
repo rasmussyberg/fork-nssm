@@ -1,3 +1,16 @@
+Changes since 2.25
+------------------
+  * NSSM can execute commands in response to service events.
+    You can now configure NSSM to run commands when the service
+    starts, stops, or when the application exits.  This allows
+    custom actions to be taken on these events.
+
+  * NSSM can list services it manages.
+
+  * NSSM can dump the configuration of services it manages.
+
+  * NSSM can show the processes managed by a service.
+
 Changes since 2.24
 ------------------
   * Allow skipping kill_process_tree().
