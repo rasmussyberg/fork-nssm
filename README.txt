@@ -31,68 +31,109 @@ The source for this fork is available at
 https://github.com/RasmusvonSyberg/fork-nssm
 
 
-Since version 2.0, the GUI can be bypassed by entering all appropriate 
+Since version 2.0, the GUI can be bypassed by entering all appropriate
 options on the command line.
 
 Since version 2.1, NSSM can be compiled for x64 platforms.
 Thanks Benjamin Mayrargue.
+NSSM also gained per-exit-code actions (Restart/Ignore/Exit) so you can
+control what happens when the managed application exits with a specific
+code.
 
-Since version 2.2, NSSM can be configured to take different actions
-based on the exit code of the managed application.
+Since version 2.2, NSSM sends properly formatted messages to the Windows
+event log and handles long registry paths without truncation.
 
-Since version 2.3, NSSM logs to the Windows event log more elegantly.
+Since version 2.3, NSSM can trigger Windows service recovery actions when
+the managed application exits.  A new "Suicide" exit action is available
+for pre-Vista systems where recovery actions require an abnormal exit.
 
-Since version 2.5, NSSM respects environment variables in its parameters.
+Since version 2.4, NSSM supports REG_EXPAND_SZ values in the registry and
+no longer hangs if startup parameters cannot be determined.
 
-Since version 2.8, NSSM tries harder to shut down the managed application
-gracefully and throttles restart attempts if the application doesn't run
-for a minimum amount of time.
+Since version 2.5, NSSM expands environment variables in Application,
+AppDirectory and AppParameters before using them.
 
-Since version 2.11, NSSM respects srvany's AppEnvironment parameter.
+Since version 2.6, NSSM handles missing AppDirectory gracefully and kills
+the entire child process tree when the service stops, not just the top-
+level application.
 
-Since version 2.13, NSSM is translated into French.
+Since version 2.7, NSSM re-reads Application, AppDirectory and
+AppParameters before each restart, so configuration changes take effect
+without restarting NSSM itself.  Shutdown now sends WM_CLOSE and WM_QUIT
+to application windows and threads before calling TerminateProcess().
+
+Since version 2.8, NSSM throttles restart attempts if the application
+exits too quickly, backing off up to a maximum of four minutes between
+retries.
+
+Since version 2.9, NSSM runs correctly on Windows versions prior to Vista.
+
+Since version 2.10, NSSM builds correctly when the source path contains
+spaces and handles an edge case in CreateProcess() with spaced paths.
+
+Since version 2.11, NSSM respects srvany's AppEnvironment registry value
+for compatibility with existing srvany-managed services.
+
+Since version 2.12, NSSM is translated into French.
 Thanks François-Régis Tardy.
+Service recovery actions via the Suicide exit action now work reliably.
+
+Since version 2.13, NSSM runs correctly on Windows 2000.
+
+Since version 2.14, English is used as the default language when the
+user's display language is not translated; French is no longer shown
+incorrectly as the default.
 
 Since version 2.15, NSSM is translated into Italian.
 Thanks Riccardo Gusmeroli.
+The GUI no longer limits paths to 256 characters.
 
-Since version 2.17, NSSM can try to shut down console applications by
-simulating a Control-C keypress.  If they have installed a handler routine
-they can clean up and shut down gracefully on receipt of the event.
+Since version 2.16, NSSM no longer kills unrelated processes when shutting
+down the managed application.
 
-Since version 2.17, NSSM can redirect the managed application's I/O streams
-to an arbitrary path.
+Since version 2.17, NSSM can redirect the managed application's I/O
+streams (stdin, stdout and stderr) to any path capable of being opened by
+CreateFile().  NSSM also attempts to send a Control-C event to console
+applications on shutdown so they can clean up gracefully.  NSSM can now
+be built with Visual Studio Express.
 
-Since version 2.18, NSSM can be configured to wait a user-specified amount
-of time for the application to exit when shutting down.
+Since version 2.18, the timeout for each shutdown method (Control-C,
+WM_CLOSE, WM_QUIT, TerminateProcess) can be configured individually in
+the registry.
 
-Since version 2.19, many more service options can be configured with the
-GUI installer as well as via the registry.
+Since version 2.19, many more service options can be configured through
+the GUI installer as well as via the registry.  NSSM also supports
+AppEnvironmentExtra to append variables to the service environment without
+replacing it, in addition to the srvany-compatible AppEnvironment.
 
-Since version 2.19, NSSM can add to the service's environment by setting
-AppEnvironmentExtra in place of or in addition to the srvany-compatible
-AppEnvironment.
+Since version 2.20, installing a service from the command line no longer
+incorrectly writes AppStopMethod* registry entries.
 
-Since version 2.22, NSSM can set the managed application's process priority
-and CPU affinity.
+Since version 2.21, installing a service from the GUI no longer
+incorrectly sets AppParameters in the registry.
 
-Since version 2.22, NSSM can apply an unconditional delay before restarting
-an application which has exited.
+Since version 2.22, NSSM can manage existing services (not just those
+it installed itself) from both the GUI and the command line.  NSSM can
+also set the managed application's process priority and CPU affinity,
+apply an unconditional delay before restarting, rotate existing output
+files when redirecting I/O, and configure the service display name,
+description, startup type, log on details and dependencies.
 
-Since version 2.22, NSSM can rotate existing output files when redirecting I/O.
+Since version 2.23, NSSM no longer generates spurious event log noise on
+legacy Windows releases, and correctly sets a local username for the
+service account.
 
-Since version 2.22, NSSM can set service display name, description, startup
-type, log on details and dependencies.
+Since version 2.24, NSSM calls TerminateProcess() correctly again
+(regression introduced in 2.23).
 
-Since version 2.22, NSSM can manage existing services.
-
-Since version 2.25, NSSM can execute commands in response to service events.
-
-Since version 2.25, NSSM can list services it manages.
-
-Since version 2.25, NSSM can dump the configuration of services it manages.
-
-Since version 2.25, NSSM can show the processes managed by a service.
+Since version 2.25, NSSM gained several new capabilities: environment
+variables are now parsed before other registry values so they can be
+referenced in Application and AppDirectory; log rotation now works on
+files held open by other processes (via copy-and-truncate) with an
+optional post-rotation delay; event hooks let you run commands on service
+Start, Stop, Exit, Rotate and Power events; and new commands list, dump
+and processes let you enumerate managed services, export their
+configuration as a batch script, and inspect their running processes.
 
 
 Usage
